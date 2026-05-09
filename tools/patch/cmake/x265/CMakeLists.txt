@@ -41,7 +41,7 @@ SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
 # System architecture detection
 string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" SYSPROC)
 set(X86_ALIASES x86 i386 i686 x86_64 amd64)
-set(ARM_ALIASES armv6l armv7 armv7s aarch64)
+set(ARM_ALIASES armv6l armv7 armv7s aarch64 arm64 arm64e)
 list(FIND X86_ALIASES "${SYSPROC}" X86MATCH)
 list(FIND ARM_ALIASES "${SYSPROC}" ARMMATCH)
 set(POWER_ALIASES ppc64 ppc64le)

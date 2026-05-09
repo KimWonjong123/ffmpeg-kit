@@ -252,8 +252,8 @@ get_library_source() {
     SOURCE_TYPE="COMMIT"
     ;;
   x265)
-    SOURCE_REPO_URL="https://github.com/arthenica/x265"
-    SOURCE_ID="3.4"
+    SOURCE_REPO_URL="https://bitbucket.org/multicoreware/x265_git"
+    SOURCE_ID="4.1"
     SOURCE_TYPE="TAG"
     ;;
   xvidcore)
