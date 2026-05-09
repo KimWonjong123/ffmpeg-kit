@@ -214,9 +214,15 @@ for library in {0..61}; do
       CONFIGURE_POSTFIX+=" --enable-libopenh264"
       ;;
     openssl)
-      FFMPEG_CFLAGS+=" $(pkg-config --cflags openssl 2>>"${BASEDIR}"/build.log)"
-      FFMPEG_LDFLAGS+=" $(pkg-config --libs --static openssl 2>>"${BASEDIR}"/build.log)"
-      CONFIGURE_POSTFIX+=" --enable-openssl"
+      # FFmpeg does not allow both gnutls and openssl at the same time
+      # Skip openssl if gnutls is enabled (LIBRARY_GNUTLS=4)
+      if [[ ${ENABLED_LIBRARIES[4]} -ne 1 ]]; then
+        FFMPEG_CFLAGS+=" $(pkg-config --cflags openssl 2>>"${BASEDIR}"/build.log)"
+        FFMPEG_LDFLAGS+=" $(pkg-config --libs --static openssl 2>>"${BASEDIR}"/build.log)"
+        CONFIGURE_POSTFIX+=" --enable-openssl"
+      else
+        echo -e "INFO: Skipping openssl because gnutls is enabled (ffmpeg doesn't allow both)\n" 1>>"${BASEDIR}"/build.log 2>&1
+      fi
       ;;
     opus)
       FFMPEG_CFLAGS+=" $(pkg-config --cflags opus 2>>"${BASEDIR}"/build.log)"

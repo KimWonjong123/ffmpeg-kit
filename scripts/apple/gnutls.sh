@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# USE HOMEBREW BISON (system bison 2.3 is too old for gnulib)
+export YACC="/opt/homebrew/opt/bison/bin/bison -y"
+export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+
 # INIT SUBMODULES
 ${SED_INLINE} 's|openssl/openssl|arthenica/openssl|g' "${BASEDIR}"/src/"${LIB_NAME}"/.gitmodules || return 1
 ${SED_INLINE} 's|tomato42|arthenica|g' "${BASEDIR}"/src/"${LIB_NAME}"/.gitmodules || return 1
